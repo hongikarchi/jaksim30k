@@ -55,6 +55,8 @@ type Actions = {
   endPromise: (id: string) => void;
   setWatcher: (promiseId: string, w: Pick<Watcher, 'name' | 'scope'>) => void;
   removeWatcher: (promiseId: string) => void;
+  /** 연결 상태는 그대로 두고 알림 범위만 바꾼다 */
+  updateWatcherScope: (promiseId: string, scope: Watcher['scope']) => void;
 
   registerCard: (company: string) => void;
 
@@ -242,6 +244,12 @@ export const useStore = create<Store>()(
           mutate((d) => {
             const p = d.promises[promiseId];
             if (p) delete p.watcher;
+          }),
+
+        updateWatcherScope: (promiseId, scope) =>
+          mutate((d) => {
+            const w = d.promises[promiseId]?.watcher;
+            if (w) w.scope = scope;
           }),
 
         registerCard: (company) =>

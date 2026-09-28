@@ -39,13 +39,13 @@ export function pushEvent(d: Data, type: AppEventType, at: number, extra: Partia
   if (d.events.length > 100) d.events.splice(0, d.events.length - 100);
 }
 
-/** 약속의 앞뒤 인증 창을 만든다 (SPEC 7.2 창 생성: 다음 7일치) */
+/** 약속의 앞뒤 인증 창을 만든다. SPEC 7.2는 다음 7일치지만, 쉬어가기 예약을 위해 다음 달 말까지 만든다 */
 export function generateOccurrences(d: Data, p: PromiseT, now: number) {
   if (p.status !== 'active') return;
   const today = new Date(now);
   const from = new Date(Math.max(p.createdAt, now - 40 * DAY));
   const cursor = new Date(from.getFullYear(), from.getMonth(), from.getDate() - 1);
-  const until = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
+  const until = new Date(today.getFullYear(), today.getMonth() + 2, 0);
   while (cursor <= until) {
     const w = p.schedule[weekdayIndex(cursor)];
     if (w) {

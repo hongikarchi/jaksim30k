@@ -95,13 +95,7 @@ export default function WatcherConnectedRoute() {
         router.back();
       }}
       onSave={(scope) => {
-        // 스토어에 범위만 바꾸는 액션이 없어 여기서 직접 고친다 (setWatcher는 초대 상태로 되돌린다)
-        if (scope !== w.scope)
-          useStore.setState((s) => {
-            const cur = s.promises[id];
-            if (!cur?.watcher) return {};
-            return { promises: { ...s.promises, [id]: { ...cur, watcher: { ...cur.watcher, scope } } } };
-          });
+        if (scope !== w.scope) useStore.getState().updateWatcherScope(id, scope);
         router.back();
       }}
     />
