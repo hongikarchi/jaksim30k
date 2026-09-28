@@ -98,7 +98,7 @@ export function GymAutoStatusView({
         <ProgressBar ratio={stayed / m.needMinutes} />
       </View>
       <WhiteRows>
-        <KeyValueRow label="마지막 확인" value={m.activityAt ? clock(m.activityAt) : '아직 없음'} />
+        <KeyValueRow label="도착 시각" value={m.activityAt ? clock(m.activityAt) : '아직 없음'} />
         <KeyValueRow label="인증 위치" value={m.placeName || '등록한 헬스장'} last />
       </WhiteRows>
       {kept ? null : (
@@ -135,7 +135,7 @@ export default function GymAutoStatusRoute() {
         stayedMin: o.auto?.stayedMin ?? 0,
         needMinutes: p.gym?.stayMinutes ?? 30,
         placeName: p.gym?.placeName ?? '',
-        activityAt: o.auto?.activityAt,
+        activityAt: o.auto?.arrivedAt ?? o.auto?.activityAt,
         keptAt: o.keptAt,
       }}
       now={now}

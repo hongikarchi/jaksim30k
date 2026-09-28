@@ -393,7 +393,7 @@ export const useStore = create<Store>()(
               const p = o && d.promises[o.promiseId];
               if (!o || !p || !['open', 'upcoming'].includes(o.status)) return;
               const stayed = (o.auto?.stayedMin ?? 0) + minutes;
-              o.auto = { ...o.auto, stayedMin: stayed, activityAt: now };
+              o.auto = { ...o.auto, stayedMin: stayed, activityAt: now, arrivedAt: o.auto?.arrivedAt ?? now };
               if (stayed >= (p.gym?.stayMinutes ?? 30) && now >= o.start && now < o.end) markKept(d, o, now);
             }),
           connectWatcher: (promiseId) =>

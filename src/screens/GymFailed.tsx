@@ -33,7 +33,7 @@ export function GymFailedView({
         <>
           <KeyValueRow
             label="머문 시간"
-            value={m === 0 ? '기록 없음' : stay?.activityAt ? `${m}분, ${clock(stay.activityAt)} 마지막 확인` : `${m}분`}
+            value={m === 0 ? '기록 없음' : stay?.activityAt ? `${m}분, ${clock(stay.activityAt)} 도착` : `${m}분`}
           />
           <KeyValueRow label="필요한 시간" value={`${needMinutes}분 이상`} />
           {chargeWhenRow(info, now, true)}
@@ -54,7 +54,7 @@ export default function GymFailedRoute() {
   return (
     <GymFailedView
       info={info}
-      stay={o.auto}
+      stay={o.auto ? { stayedMin: o.auto.stayedMin, activityAt: o.auto.arrivedAt ?? o.auto.activityAt } : undefined}
       needMinutes={p.gym?.stayMinutes ?? 30}
       now={now}
       {...missedActions(occ, info)}

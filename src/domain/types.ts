@@ -61,7 +61,7 @@ export type Occurrence = {
   chargeId?: string;
   disputeId?: string;
   /** 자동 인증 기록 */
-  auto?: { distanceKm?: number; manual?: boolean; stayedMin?: number; activityAt?: number };
+  auto?: { distanceKm?: number; manual?: boolean; stayedMin?: number; activityAt?: number; arrivedAt?: number };
 };
 
 export type AiResult = 'pass' | 'unclear' | 'fail';
