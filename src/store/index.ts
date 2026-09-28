@@ -124,6 +124,7 @@ export const useStore = create<Store>()(
         login: (provider) =>
           mutate((d, now) => {
             const isNew = !d.user;
+            d.signedOut = false;
             if (!d.user)
               d.user = {
                 provider,
@@ -141,7 +142,7 @@ export const useStore = create<Store>()(
             if (d.user) d.user.permissions = { ...d.user.permissions, ...p };
           }),
 
-        logout: () => set({ ...initialData() }),
+        logout: () => set({ signedOut: true }),
 
         withdraw: () => {
           // 결제 예정 금액은 먼저 결제하고 모든 데이터를 지운다 (SPEC 2.6)
@@ -423,6 +424,7 @@ function pick(s: Store): Data {
     version: s.version,
     devOffset: s.devOffset,
     user: s.user,
+    signedOut: s.signedOut,
     card: s.card,
     promises: s.promises,
     occurrences: s.occurrences,

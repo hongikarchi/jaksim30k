@@ -18,6 +18,8 @@ export type Data = {
   /** 개발용 시간 이동 (ms). 앱 안의 "지금" = 실제 시각 + devOffset */
   devOffset: number;
   user: User | null;
+  /** 로그아웃 상태. 진짜 서버처럼 약속과 기록은 남아 있고, 다시 로그인하면 이어진다 */
+  signedOut: boolean;
   card: Card | null;
   promises: Record<string, PromiseT>;
   occurrences: Record<string, Occurrence>;
@@ -37,6 +39,7 @@ export const initialData = (): Data => ({
   version: 1,
   devOffset: 0,
   user: null,
+  signedOut: false,
   card: null,
   promises: {},
   occurrences: {},
