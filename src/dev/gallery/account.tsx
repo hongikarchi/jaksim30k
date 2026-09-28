@@ -86,7 +86,7 @@ export const entries: GalleryEntry[] = [
     n: 49,
     title: '회원 탈퇴',
     render: () => (
-      <WithdrawView model={{ activeCount: 2, scheduledAmount: 5000, heldCount: 0 }} onBack={noop} onWithdraw={noop} />
+      <WithdrawView model={{ activeCount: 2, scheduledAmount: 5000, heldCount: 0, failedAmount: 0 }} onBack={noop} onWithdraw={noop} />
     ),
   },
   {
@@ -94,7 +94,7 @@ export const entries: GalleryEntry[] = [
     variant: '확인함',
     title: '회원 탈퇴',
     render: () => (
-      <WithdrawView model={{ activeCount: 2, scheduledAmount: 5000, heldCount: 1 }} initialChecked onBack={noop} onWithdraw={noop} />
+      <WithdrawView model={{ activeCount: 2, scheduledAmount: 5000, heldCount: 1, failedAmount: 0 }} initialChecked onBack={noop} onWithdraw={noop} />
     ),
   },
   { n: 50, title: '결제 내역', render: () => <PaymentsView model={payments('waiting')} onBack={noop} /> },

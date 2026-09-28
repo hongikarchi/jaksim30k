@@ -29,6 +29,8 @@ export type WithdrawModel = {
   scheduledAmount: number;
   /** 이의제기 중이라 보류된 건(held): 결과 후 처리 */
   heldCount: number;
+  /** 결제 실패로 밀린 금액 (failed) */
+  failedAmount: number;
 };
 
 export function buildWithdrawModel(d: Data): WithdrawModel {
@@ -37,6 +39,7 @@ export function buildWithdrawModel(d: Data): WithdrawModel {
     activeCount: activePromises(d).length,
     scheduledAmount: charges.filter((c) => c.status === 'scheduled').reduce((a, c) => a + c.amount, 0),
     heldCount: charges.filter((c) => c.status === 'held').length,
+    failedAmount: charges.filter((c) => c.status === 'failed').reduce((a, c) => a + c.amount, 0),
   };
 }
 
@@ -72,6 +75,7 @@ export function WithdrawView({
       <View style={{ paddingVertical: 4, paddingHorizontal: 20, borderRadius: radius.card, backgroundColor: colors.surface }}>
         <KeyValueRow label="진행 중인 약속" value={m.activeCount ? `${m.activeCount}개, 바로 끝나요` : '없어요'} />
         <KeyValueRow label="결제 예정 금액" value={m.scheduledAmount ? `${won(m.scheduledAmount)} 먼저 결제` : '없어요'} />
+        {m.failedAmount ? <KeyValueRow label="결제 안 된 금액" value={`${won(m.failedAmount)} 밀림`} /> : null}
         {m.heldCount ? <KeyValueRow label="이의제기 중인 건" value={`${m.heldCount}건, 결과 후 처리`} /> : null}
         <KeyValueRow label="기록과 결제 내역" value="보관 기간 뒤 삭제" last />
       </View>
