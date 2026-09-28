@@ -44,7 +44,9 @@ export function SuccessView({ model, onHome }: { model: SuccessModel; onHome: ()
 export function nextLineOf(next: Occurrence | undefined, now: number) {
   if (!next) return '';
   const days = Math.round((parseDateKey(next.date).getTime() - parseDateKey(dateKey(new Date(now))).getTime()) / (24 * HOUR));
-  if (days === 1) return `내일도 ${clock(next.start)}에 만나요.`;
+  const at = clock(next.start);
+  // 하루 종일 열리는 창(00:00 시작)은 시각을 빼고 말한다
+  if (days === 1) return at === '00:00' ? '내일도 만나요.' : `내일도 ${at}에 만나요.`;
   return `${nextLabel(next, now)}에 또 만나요.`;
 }
 

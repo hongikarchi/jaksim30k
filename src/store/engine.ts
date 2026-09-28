@@ -27,6 +27,8 @@ export const DENIED_CHARGE_DELAY_HOURS = 12;
 export const CHARGE_DELAY_HOURS = 24;
 export const PAYMENT_GRACE_HOURS = 72;
 export const RUN_MIN_KM = 5;
+/** 제출 실패한 사진을 늦게 보내도 인정하는 기간 (SPEC 2.2-5에 기간이 없어 임시로 정함) */
+export const LATE_UPLOAD_HOURS = 6;
 
 let seq = 0;
 export const newId = (prefix: string) => `${prefix}_${Date.now().toString(36)}${(seq++).toString(36)}`;
@@ -148,7 +150,12 @@ export function resolveDispute(d: Data, disputeId: string, approve: boolean, now
     p.missCount = Math.max(0, p.missCount - 1);
   } else {
     dp.status = 'denied';
-    dp.denyReason = denyReason ?? '제출한 사진에서 미션을 확인할 수 없었어요';
+    const defaults: Record<string, string> = {
+      wrong_fail: '제출한 사진에서 미션을 확인할 수 없었어요',
+      sick: '확인할 수 있는 자료가 없어 사유를 인정하기 어려웠어요',
+      other: '보내주신 설명만으로는 사유를 인정하기 어려웠어요',
+    };
+    dp.denyReason = denyReason ?? defaults[dp.reason] ?? defaults.other;
     if (c && (c.status === 'held' || c.status === 'scheduled')) {
       c.status = 'scheduled';
       c.scheduledAt = now + DENIED_CHARGE_DELAY_HOURS * HOUR;
@@ -170,7 +177,7 @@ export function tick(d: Data, now: number) {
       if (p.status === 'ended') continue;
       // 제출 실패로 남아 있는 사진은 늦게 보내도 인정 (SPEC 2.2-5)
       const pendingUpload = o.submissionIds.map((id) => d.submissions[id]).find((s) => s?.uploadFailed);
-      if (!pendingUpload) markMissed(d, o, now, p.method !== 'photo');
+      if (!pendingUpload || now >= o.end + LATE_UPLOAD_HOURS * HOUR) markMissed(d, o, now, p.method !== 'photo');
     }
     if (o.status === 'reviewing') {
       const s = d.submissions[o.submissionIds[o.submissionIds.length - 1]];

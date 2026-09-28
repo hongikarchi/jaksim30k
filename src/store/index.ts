@@ -17,6 +17,7 @@ import type {
   Submission,
   Watcher,
 } from '../domain/types';
+import { keepPhoto } from '../lib/photos';
 import { initialData, type Data } from './data';
 import {
   DISPUTE_REVIEW_HOURS,
@@ -183,7 +184,7 @@ export const useStore = create<Store>()(
               status: 'active',
               createdAt: now,
               gym: dr.gym,
-              room: dr.room,
+              room: dr.room ? { ...dr.room, refPhotoUri: keepPhoto(dr.room.refPhotoUri) } : undefined,
               pausesByMonth: {},
             };
             d.promises[p.id] = p;
@@ -268,7 +269,7 @@ export const useStore = create<Store>()(
             const s: Submission = {
               id: newId('sb'),
               occurrenceId,
-              uri: input.uri,
+              uri: keepPhoto(input.uri),
               takenAt: input.takenAt,
               mission: o.mission,
               book: input.book,
