@@ -162,9 +162,12 @@ export function HomeView({
 }) {
   const header = (
     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 4 }}>
-      <Text size={22} weight="bold" tight>
-        오늘의 약속
-      </Text>
+      {/* 제목을 길게 누르면 개발 메뉴 (MVP 테스트용) */}
+      <Pressable onLongPress={() => onNavigate(href.dev)} delayLongPress={800}>
+        <Text size={22} weight="bold" tight>
+          오늘의 약속
+        </Text>
+      </Pressable>
       <IconButton label="계정" round onPress={() => onNavigate(href.account)}>
         <Icon name="user" size={20} />
       </IconButton>
