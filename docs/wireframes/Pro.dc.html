@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>프로 구독</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 14px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center; height: 44px">
+<a href="Profile.dc.html" aria-label="뒤로" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -6px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+</div>
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; padding: 16px 20px; border-radius: 24px; background: #151515">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'DotGothic16', monospace; font-size: 40px; line-height: 1; color: #F25C05">PRO</div>
+<div style="font-size: 17px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em; line-height: 1.35">인증은 더 간단하게,<br>약속은 더 단단하게</div>
+</div>
+<div style="flex-shrink: 0; padding: 6px 10px; border-radius: 8px; background: #F25C05; color: #151515; font-size: 12px; font-weight: 700">7일 무료</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-if value="{{ monthOn }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ pick_month }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; min-height: 84px; border: 2px solid #151515"><span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 11px; background: #151515; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span style="font-size: 13px; font-weight: 600; color: #5E5E59">월간</span><span style="font-size: 20px; font-weight: 700; color: #151515; letter-spacing: -0.02em">4,900원<span style="font-size: 13px; font-weight: 500; color: #6B6B66">/월</span></span></button></sc-if><sc-if value="{{ monthOff }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ pick_month }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; min-height: 84px; border: 1px solid #DAD9D4"><span style="flex-shrink: 0; box-sizing: border-box; width: 22px; height: 22px; border-radius: 11px; border: 2px solid #C9C8C3; background: #FFFFFF"></span><span style="font-size: 13px; font-weight: 600; color: #5E5E59">월간</span><span style="font-size: 20px; font-weight: 700; color: #151515; letter-spacing: -0.02em">4,900원<span style="font-size: 13px; font-weight: 500; color: #6B6B66">/월</span></span></button></sc-if>
+<sc-if value="{{ yearOn }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ pick_year }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; min-height: 84px; border: 2px solid #151515"><span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 11px; background: #151515; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span style="font-size: 13px; font-weight: 600; color: #5E5E59">연간</span><span style="font-size: 20px; font-weight: 700; color: #151515; letter-spacing: -0.02em">39,000원<span style="font-size: 13px; font-weight: 500; color: #6B6B66">/년</span></span><span style="padding: 2px 8px; border-radius: 6px; background: #F25C05; color: #151515; font-size: 11px; font-weight: 700">월 3,250원</span></button></sc-if><sc-if value="{{ yearOff }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ pick_year }}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; min-height: 84px; border: 1px solid #DAD9D4"><span style="flex-shrink: 0; box-sizing: border-box; width: 22px; height: 22px; border-radius: 11px; border: 2px solid #C9C8C3; background: #FFFFFF"></span><span style="font-size: 13px; font-weight: 600; color: #5E5E59">연간</span><span style="font-size: 20px; font-weight: 700; color: #151515; letter-spacing: -0.02em">39,000원<span style="font-size: 13px; font-weight: 500; color: #6B6B66">/년</span></span><span style="padding: 2px 8px; border-radius: 6px; background: #F25C05; color: #151515; font-size: 11px; font-weight: 700">월 3,250원</span></button></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; padding: 4px 18px; border-radius: 20px; background: #FFFFFF">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; align-items: center; height: 30px; border-bottom: 1px solid #EAE9E5; font-size: 12px; color: #6B6B66"><span></span><span style="text-align: center">무료</span><span style="text-align: center; font-weight: 700; color: #151515">프로</span></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; align-items: center; min-height: 38px; border-bottom: 1px solid #EAE9E5; font-size: 15px"><span>쉬어가기</span><span style="text-align: center; color: #6B6B66">월 1번</span><span style="display: flex; justify-content: center; font-weight: 700">월 4번</span></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; align-items: center; min-height: 38px; border-bottom: 1px solid #EAE9E5; font-size: 15px"><span>러닝 자동 인증</span><span style="text-align: center; color: #6B6B66">—</span><span style="display: flex; justify-content: center; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; align-items: center; min-height: 38px; border-bottom: 1px solid #EAE9E5; font-size: 15px"><span>헬스장 GPS 자동 인증</span><span style="text-align: center; color: #6B6B66">—</span><span style="display: flex; justify-content: center; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px; align-items: center; min-height: 38px; font-size: 15px"><span>감시자 지정</span><span style="text-align: center; color: #6B6B66">—</span><span style="display: flex; justify-content: center; font-weight: 700"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span></div>
+</div>
+<div style="flex-grow: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 13px; line-height: 1.5; color: #5E5E59; text-align: center">체험이 끝나기 하루 전에 알려드려요. 언제든 해지할 수 있어요.</div>
+<a href="Profile.dc.html" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #151515; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none">7일 무료로 시작하기</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { plan: 'year' }; }
+  renderVals() {
+    const p = this.state.plan;
+    return { yearOn: p === 'year', yearOff: p !== 'year', monthOn: p === 'month', monthOff: p !== 'month',
+      pick_year: () => this.setState({ plan: 'year' }), pick_month: () => this.setState({ plan: 'month' }) };
+  }
+}
+</script>
+</body>
+</html>

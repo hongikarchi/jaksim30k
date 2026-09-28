@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>감시자 지정</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 14px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center; height: 44px">
+<a href="PromiseDetail.dc.html" aria-label="뒤로" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -6px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+<div style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">감시자</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 22px; border-radius: 24px; background: #151515">
+<div style="display: flex; align-items: center; gap: 8px"><span style="font-size: 13px; font-weight: 600; color: #B8B8B2">미라클모닝</span><span style="padding: 2px 6px; border-radius: 6px; background: #151515; color: #F25C05; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em">PRO</span></div>
+<div style="font-size: 20px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em; line-height: 1.35">놓치면 누군가 알게 돼요</div>
+<div style="font-size: 14px; line-height: 1.5; color: #B8B8B2">지정한 사람에게 카카오톡으로 결과가 가요. 돈 말고 체면도 걸어보세요.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 14px; font-weight: 600; color: #5E5E59">무엇을 알려줄까요?</div>
+<sc-if value="{{ missOn }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ pick_miss }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; width: 100%; border: 2px solid #151515"><span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 11px; background: #151515; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">놓친 날만</span><span style="font-size: 12px; color: #6B6B66">약속을 어겼을 때만 알려요</span></span></button></sc-if><sc-if value="{{ missOff }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ pick_miss }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; width: 100%; border: 1px solid #DAD9D4"><span style="flex-shrink: 0; box-sizing: border-box; width: 22px; height: 22px; border-radius: 11px; border: 2px solid #C9C8C3; background: #FFFFFF"></span><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">놓친 날만</span><span style="font-size: 12px; color: #6B6B66">약속을 어겼을 때만 알려요</span></span></button></sc-if>
+<sc-if value="{{ allOn }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ pick_all }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; width: 100%; border: 2px solid #151515"><span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 11px; background: #151515; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">매일 결과</span><span style="font-size: 12px; color: #6B6B66">지킨 날도 함께 알려요</span></span></button></sc-if><sc-if value="{{ allOff }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ pick_all }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; width: 100%; border: 1px solid #DAD9D4"><span style="flex-shrink: 0; box-sizing: border-box; width: 22px; height: 22px; border-radius: 11px; border: 2px solid #C9C8C3; background: #FFFFFF"></span><span style="flex-grow: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">매일 결과</span><span style="font-size: 12px; color: #6B6B66">지킨 날도 함께 알려요</span></span></button></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 14px; font-weight: 600; color: #5E5E59">감시자</div>
+<div style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 16px; border-radius: 14px; border: 1px dashed #A9A8A3; background: #FFFFFF"><span style="font-size: 15px; color: #6B6B66">아직 없어요</span><span style="font-size: 12px; color: #6B6B66">초대를 수락하면 연결돼요</span></div>
+</div>
+<div style="flex-grow: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="font-size: 13px; line-height: 1.5; color: #5E5E59; text-align: center">감시자는 앱이 없어도 카카오톡으로 받아볼 수 있어요</div>
+<a href="WatcherMessage.dc.html" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #FEE500; color: #191600; font-size: 17px; font-weight: 600; text-decoration: none">카카오톡으로 초대하기</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { m: 'miss' }; }
+  renderVals() { const m = this.state.m; return { missOn: m === 'miss', missOff: m !== 'miss', allOn: m === 'all', allOff: m !== 'all', pick_miss: () => this.setState({ m: 'miss' }), pick_all: () => this.setState({ m: 'all' }) }; }
+}
+</script>
+</body>
+</html>

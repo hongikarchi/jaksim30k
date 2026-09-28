@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>책읽기 기록</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 24px 32px; display: flex; flex-direction: column; gap: 20px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<a href="BookVerify.dc.html" style="display: flex; align-items: center; gap: 2px; height: 44px; margin-left: -8px; font-size: 15px; font-weight: 600; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>다시 찍기</a>
+<div style="display: flex; align-items: baseline; gap: 6px"><span style="font-size: 12px; color: #6B6B66">남은 시간</span><span style="font-family: 'DotGothic16', monospace; font-size: 18px">01:17</span></div>
+</div>
+<h1 style="margin: 0; font-size: 26px; line-height: 1.3; font-weight: 700; letter-spacing: -0.03em">오늘 읽은 걸<br>한 줄로 남겨주세요</h1>
+<div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; align-items: center">
+<div style="position: relative; height: 160px; border-radius: 16px; background: #DAD9D4; display: flex; align-items: center; justify-content: center">
+<div style="font-size: 12px; color: #5E5E59; text-align: center">[촬영한<br>페이지]</div>
+<div style="position: absolute; left: 8px; right: 8px; bottom: 8px; padding: 4px 0; border-radius: 6px; background: #151515; font-family: 'DotGothic16', monospace; font-size: 13px; color: #F25C05; text-align: center">22:41:05</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 12px; color: #6B6B66">오늘의 미션</div><div style="font-size: 15px; font-weight: 600">쪽 번호가 보이게</div></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><div style="font-size: 12px; color: #6B6B66">촬영 시각</div><div style="font-size: 15px; font-weight: 600">22:41:05</div></div>
+</div>
+</div>
+<div style="position: relative; display: flex; flex-direction: column; gap: 8px">
+<label for="book-title" style="font-size: 14px; font-weight: 600; color: #5E5E59">읽는 책</label>
+<input id="book-title" type="text" autocomplete="off" placeholder="책 제목을 입력하세요" value="{{ q }}" onInput="{{ onInput }}" onFocus="{{ onFocus }}" style="box-sizing: border-box; width: 100%; height: 52px; padding: 0 16px; border-radius: 14px; border: 1px solid #DAD9D4; background: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 600; color: #151515">
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; left: 0; right: 0; top: 86px; z-index: 5; display: flex; flex-direction: column; padding: 6px; border-radius: 14px; background: #FFFFFF; box-shadow: 0 8px 24px rgba(21, 21, 21, 0.16)">
+<div style="padding: 8px 10px 4px; font-size: 12px; color: #6B6B66">최근에 읽은 책</div>
+<sc-for list="{{ recent }}" as="r" hint-placeholder-count="2">
+<button type="button" onClick="{{ r.pick }}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border: none; border-radius: 10px; background: transparent; font-family: inherit; font-size: 15px; color: #151515; text-align: left; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B6B66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>{{ r.title }}</button>
+</sc-for>
+<sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{ addNew }}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 10px; border: none; border-top: 1px solid #EAE9E5; border-radius: 0; background: transparent; font-family: inherit; font-size: 15px; font-weight: 600; color: #151515; text-align: left; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>'{{ q }}' 새 책으로 추가</button>
+</sc-if>
+</div>
+</sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="book-line" style="font-size: 14px; font-weight: 600; color: #5E5E59">오늘의 한 줄</label>
+<textarea id="book-line" rows="3" placeholder="기억에 남는 문장이나 생각을 적어주세요" style="box-sizing: border-box; width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid #DAD9D4; font-family: inherit; font-size: 15px; resize: none; background: #FFFFFF"></textarea>
+<div style="font-size: 12px; color: #6B6B66; text-align: right">0 / 10자 이상</div>
+</div>
+<div style="flex-grow: 1"></div>
+<a href="Success.dc.html" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #151515; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none">기록 남기기</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.books = ['[최근에 읽던 책]', '[그 전에 읽은 책]']; this.state = { q: '[최근에 읽던 책]', open: false }; }
+  renderVals() {
+    const q = this.state.q || '';
+    const recent = this.books.filter((b) => !q || b.includes(q) || q === this.books[0]).map((title) => ({ title, pick: () => this.setState({ q: title, open: false }) }));
+    return {
+      q, open: this.state.open, recent,
+      hasQuery: q.trim().length > 0 && !this.books.includes(q),
+      onInput: (e) => this.setState({ q: e.target.value, open: true }),
+      onFocus: () => this.setState({ open: true }),
+      addNew: () => this.setState({ open: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

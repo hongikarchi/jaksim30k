@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이의제기</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 24px 32px; display: flex; flex-direction: column; gap: 22px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center">
+<a href="Missed.dc.html" aria-label="뒤로" style="width: 44px; height: 44px; display: flex; align-items: center; margin-left: -10px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+</div>
+<h1 style="margin: 0; font-size: 26px; line-height: 1.3; font-weight: 700; letter-spacing: -0.03em">무슨 일이 있었나요?</h1>
+<div role="radiogroup" aria-label="이의제기 사유" style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{ items }}" as="it" hint-placeholder-count="4">
+<sc-if value="{{ it.on }}" hint-placeholder-val="{{ false }}"><button type="button" role="radio" aria-checked="true" onClick="{{ it.pick }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; border: 2px solid #151515"><span style="flex-shrink: 0; width: 22px; height: 22px; border-radius: 11px; background: #151515; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></span><span style="flex-grow: 1; font-size: 15px; font-weight: 600; color: #151515">{{ it.text }}</span><sc-if value="{{ it.fast }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink: 0; padding: 4px 8px; border-radius: 6px; background: #F25C05; color: #151515; font-size: 12px; font-weight: 700">바로 취소</span></sc-if></button></sc-if>
+<sc-if value="{{ it.off }}" hint-placeholder-val="{{ true }}"><button type="button" role="radio" aria-checked="false" onClick="{{ it.pick }}" style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; box-sizing: border-box; border: 1px solid #DAD9D4"><span style="flex-shrink: 0; box-sizing: border-box; width: 22px; height: 22px; border-radius: 11px; border: 2px solid #C9C8C3; background: #FFFFFF"></span><span style="flex-grow: 1; font-size: 15px; font-weight: 600; color: #151515">{{ it.text }}</span><sc-if value="{{ it.fast }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink: 0; padding: 4px 8px; border-radius: 6px; background: #F25C05; color: #151515; font-size: 12px; font-weight: 700">바로 취소</span></sc-if></button></sc-if>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="dispute-note" style="font-size: 14px; font-weight: 600; color: #5E5E59">자세한 설명 (선택)</label>
+<textarea id="dispute-note" rows="3" placeholder="어떤 상황이었는지 알려주세요" style="box-sizing: border-box; width: 100%; padding: 14px 16px; border-radius: 14px; border: 1px solid #DAD9D4; font-family: inherit; font-size: 15px; resize: none; background: #FFFFFF"></textarea>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 14px; background: #FFFFFF">
+<div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.45"><span style="font-weight: 700; flex-shrink: 0">오류</span><span style="color: #5E5E59">확인 없이 바로 결제를 취소해요.</span></div>
+<div style="display: flex; gap: 10px; font-size: 14px; line-height: 1.45"><span style="font-weight: 700; flex-shrink: 0">그 외</span><span style="color: #5E5E59">12시간 안에 사람이 확인하고 결과를 알려드려요. 그동안 결제는 멈춰 있어요.</span></div>
+</div>
+<div style="flex-grow: 1"></div>
+<a href="{{ nextHref }}" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #151515; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none">제출하기</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.texts = ["앱이나 카메라 오류가 있었어요", "인증했는데 실패로 처리됐어요", "몸이 아팠어요", "기타"]; this.state = { pick: 0 }; }
+  renderVals() {
+    const p = this.state.pick;
+    return {
+      items: this.texts.map((text, i) => ({ text, on: p === i, off: p !== i, fast: i === 0, pick: () => this.setState({ pick: i }) })),
+      nextHref: p === 0 ? 'DisputeResult.dc.html' : 'DisputeSubmitted.dc.html'
+    };
+  }
+}
+</script>
+</body>
+</html>

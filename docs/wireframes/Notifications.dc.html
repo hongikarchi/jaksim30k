@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>알림 설정</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 14px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center; height: 44px">
+<a href="Profile.dc.html" aria-label="뒤로" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -6px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+<div style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">알림</div>
+</div>
+<div style="font-size: 13px; color: #5E5E59; padding: 0 4px">모든 약속에 똑같이 적용돼요. 시간은 각 약속의 인증 시간 기준이에요.</div>
+<div style="display: flex; flex-direction: column; padding: 4px 20px; border-radius: 22px; background: #FFFFFF">
+<button type="button" role="switch" aria-checked="{{ before.on }}" onClick="{{ before.toggle }}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 0; border: none; background: transparent; font-family: inherit; text-align: left; cursor: pointer"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">인증 시작 전 알림</span><span style="font-size: 12px; color: #6B6B66">인증 창이 열리기 전에 깨워드려요</span></span><sc-if value="{{ before.on }}" hint-placeholder-val="{{ true }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #151515; padding: 3px; display: flex; justify-content: flex-end"><span style="width: 24px; height: 24px; border-radius: 12px; background: #F25C05"></span></span></sc-if><sc-if value="{{ before.off }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #D2D1CC; padding: 3px; display: flex; justify-content: flex-start"><span style="width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF"></span></span></sc-if></button><sc-if value="{{ before.on }}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 8px; padding-bottom: 16px"><sc-for list="{{ before.opts }}" as="o" hint-placeholder-count="3"><sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ o.pick }}" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #151515; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{ o.label }}</button></sc-if><sc-if value="{{ o.unsel }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ o.pick }}" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid #DAD9D4; background: #FFFFFF; color: #5E5E59; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{ o.label }}</button></sc-if></sc-for></div></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; padding: 4px 20px; border-radius: 22px; background: #FFFFFF">
+<button type="button" role="switch" aria-checked="{{ deadline.on }}" onClick="{{ deadline.toggle }}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 0; border: none; background: transparent; font-family: inherit; text-align: left; cursor: pointer"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">마감 임박 알림</span><span style="font-size: 12px; color: #6B6B66">아직 인증하지 않았을 때만 보내요</span></span><sc-if value="{{ deadline.on }}" hint-placeholder-val="{{ true }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #151515; padding: 3px; display: flex; justify-content: flex-end"><span style="width: 24px; height: 24px; border-radius: 12px; background: #F25C05"></span></span></sc-if><sc-if value="{{ deadline.off }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #D2D1CC; padding: 3px; display: flex; justify-content: flex-start"><span style="width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF"></span></span></sc-if></button><sc-if value="{{ deadline.on }}" hint-placeholder-val="{{ true }}"><div style="display: flex; gap: 8px; padding-bottom: 16px"><sc-for list="{{ deadline.opts }}" as="o" hint-placeholder-count="3"><sc-if value="{{ o.sel }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ o.pick }}" style="height: 36px; padding: 0 14px; border-radius: 18px; border: none; background: #151515; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{ o.label }}</button></sc-if><sc-if value="{{ o.unsel }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ o.pick }}" style="height: 36px; padding: 0 14px; border-radius: 18px; border: 1px solid #DAD9D4; background: #FFFFFF; color: #5E5E59; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">{{ o.label }}</button></sc-if></sc-for></div></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; padding: 4px 20px; border-radius: 22px; background: #FFFFFF">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">판정·결제 알림</span><span style="font-size: 12px; color: #6B6B66">돈과 관련된 알림이라 끌 수 없어요</span></span><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #5E5E59; padding: 3px; display: flex; justify-content: flex-end"><span style="width: 24px; height: 24px; border-radius: 12px; background: #9A9A94"></span></span></div>
+<div style="height: 1px; background: #EAE9E5"></div>
+<button type="button" role="switch" aria-checked="{{ promo.on }}" onClick="{{ promo.toggle }}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%; min-height: 64px; padding: 0; border: none; background: transparent; font-family: inherit; text-align: left; cursor: pointer"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600; color: #151515">혜택과 소식</span><span style="font-size: 12px; color: #6B6B66">새 기능과 이벤트 안내</span></span><sc-if value="{{ promo.on }}" hint-placeholder-val="{{ true }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #151515; padding: 3px; display: flex; justify-content: flex-end"><span style="width: 24px; height: 24px; border-radius: 12px; background: #F25C05"></span></span></sc-if><sc-if value="{{ promo.off }}" hint-placeholder-val="{{ false }}"><span style="flex-shrink: 0; box-sizing: border-box; width: 50px; height: 30px; border-radius: 15px; background: #D2D1CC; padding: 3px; display: flex; justify-content: flex-start"><span style="width: 24px; height: 24px; border-radius: 12px; background: #FFFFFF"></span></span></sc-if></button>
+</div>
+<div style="flex-grow: 1"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { before: true, beforeK: 1, deadline: true, deadlineK: 0, promo: false }; }
+  renderVals() {
+    const s = this.state;
+    const mk = (key, kKey, labels) => ({
+      on: s[key], off: !s[key], toggle: () => this.setState({ [key]: !s[key] }),
+      opts: kKey ? labels.map((label, i) => ({ label, sel: s[kKey] === i, unsel: s[kKey] !== i, pick: () => this.setState({ [kKey]: i }) })) : []
+    });
+    return {
+      before: mk('before', 'beforeK', ['5분 전', '10분 전', '30분 전']),
+      deadline: mk('deadline', 'deadlineK', ['5분 전', '10분 전', '30분 전']),
+      promo: mk('promo', null, [])
+    };
+  }
+}
+</script>
+</body>
+</html>

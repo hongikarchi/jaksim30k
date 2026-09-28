@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시작 화면</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 64px 24px 32px; display: flex; flex-direction: column; gap: 32px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="width: 342px; height: 342px; box-sizing: border-box; border-radius: 36px; background: #151515; position: relative; padding: 28px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<div style="font-size: 13px; font-weight: 600; color: #B8B8B2">남은 시간</div>
+<div style="width: 10px; height: 10px; border-radius: 5px; background: #F25C05"></div>
+</div>
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+<div style="font-family: 'DotGothic16', monospace; font-size: 104px; line-height: 1; letter-spacing: 0; white-space: nowrap; color: #F25C05">07:42</div>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-size: 32px; line-height: 1.25; font-weight: 700; letter-spacing: -0.03em">일어나지 못하면,<br>돈이 나갑니다.</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #5E5E59">약속을 어긴 날에만 결제돼요.<br>지키면 한 푼도 나가지 않아요.</p>
+</div>
+<div style="flex-grow: 1"></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="Login.dc.html" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: #151515; color: #FFFFFF; font-size: 17px; font-weight: 600; text-decoration: none">시작하기</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

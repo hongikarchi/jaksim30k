@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>쉬어가기 예약</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&amp;family=IBM+Plex+Sans+KR:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#E9E8E4}
+a{color:#151515}a:hover{color:#000000}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 56px 20px 32px; display: flex; flex-direction: column; gap: 12px; background: #E9E8E4; color: #151515; font-family: 'IBM Plex Sans KR', sans-serif">
+<div style="display: flex; align-items: center; height: 44px">
+<a href="PromiseDetail.dc.html" aria-label="뒤로" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; margin-left: -6px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#151515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></a>
+<div style="font-size: 20px; font-weight: 700; letter-spacing: -0.02em">쉬어가기</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 4px">
+<div style="font-size: 22px; font-weight: 700; letter-spacing: -0.02em">쉬고 싶은 날을 골라주세요</div>
+<div style="font-size: 14px; line-height: 1.5; color: #5E5E59">고른 날은 인증하지 않아도 결제되지 않고, 연속 기록도 이어져요.</div>
+</div>
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 20px; background: #151515"><div style="font-size: 13px; color: #B8B8B2">이번 달 남은 횟수</div><div style="font-family: 'DotGothic16', monospace; font-size: 30px; line-height: 1.1; color: #F25C05">{{ left }}<span style="font-family: 'IBM Plex Sans KR', sans-serif; font-size: 16px; font-weight: 700; margin-left: 3px; color: #FFFFFF">회</span></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 22px; background: #FFFFFF">
+<div style="font-size: 15px; font-weight: 600; text-align: center; padding-bottom: 4px">2026년 10월</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px; font-size: 12px; color: #6B6B66; text-align: center"><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div>토</div><div>일</div></div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 5px">
+<sc-for list="{{ cells }}" as="d" hint-placeholder-count="42">
+<sc-if value="{{ d.sel }}" hint-placeholder-val="{{ false }}"><button type="button" aria-pressed="true" onClick="{{ d.toggle }}" style="height: 30px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; font-family: inherit; padding: 0; border: none; background: #F25C05; color: #151515; cursor: pointer">{{ d.n }}</button></sc-if>
+<sc-if value="{{ d.pickable }}" hint-placeholder-val="{{ true }}"><button type="button" aria-pressed="false" onClick="{{ d.toggle }}" style="height: 30px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; font-family: inherit; padding: 0; border: 1px solid #DAD9D4; background: #FFFFFF; color: #151515; cursor: pointer">{{ d.n }}</button></sc-if>
+<sc-if value="{{ d.locked }}" hint-placeholder-val="{{ false }}"><div style="height: 30px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; font-family: inherit; padding: 0; background: #EFEEEA; color: #A9A8A3">{{ d.n }}</div></sc-if>
+<sc-if value="{{ d.other }}" hint-placeholder-val="{{ false }}"><div style="height: 30px; border-radius: 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; font-family: inherit; padding: 0; color: #C9C8C3">{{ d.n }}</div></sc-if>
+</sc-for>
+</div>
+<div style="display: flex; gap: 14px; font-size: 12px; color: #6B6B66; padding-top: 4px"><span style="display: flex; gap: 6px; align-items: center"><span style="width: 10px; height: 10px; border-radius: 3px; background: #F25C05"></span>쉬는 날</span><span style="display: flex; gap: 6px; align-items: center"><span style="width: 10px; height: 10px; border-radius: 3px; background: #EFEEEA"></span>고를 수 없는 날</span></div>
+</div>
+<div style="font-size: 13px; line-height: 1.5; color: #5E5E59; padding: 0 4px">오늘도 고를 수 있어요. 단, 인증 창이 닫히기 전까지만 돼요.</div>
+<div style="flex-grow: 1"></div>
+<a href="{{ ctaHref }}" style="flex-shrink: 0; display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 14px; background: {{ ctaBg }}; color: {{ ctaFg }}; font-size: 17px; font-weight: 600; text-decoration: none">{{ ctaLabel }}</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.quota = 1; this.state = { picked: [] }; }
+  renderVals() {
+    const picked = this.state.picked, left = this.quota - picked.length;
+    const cells = [];
+    [28, 29, 30].forEach((n) => cells.push({ n, other: true }));
+    for (let n = 1; n <= 31; n++) {
+      const wd = (n + 2) % 7; // Oct 1 2026 = Thu -> index 3 (Mon=0)
+      const weekday = wd < 5, open = weekday;
+      const sel = picked.includes(n);
+      cells.push({ n, sel, pickable: open && !sel, locked: !open, toggle: () => {
+        if (sel) this.setState({ picked: picked.filter((x) => x !== n) });
+        else if (left > 0) this.setState({ picked: picked.concat(n) });
+      } });
+    }
+    for (let n = 1; cells.length < 42; n++) cells.push({ n, other: true });
+    return {
+      cells: cells.map((c) => ({ sel: false, pickable: false, locked: false, other: false, toggle: () => {}, ...c })),
+      left: String(left),
+      ctaHref: picked.length ? 'PromiseDetail.dc.html' : '#',
+      ctaBg: picked.length ? '#151515' : '#C9C8C3',
+      ctaFg: picked.length ? '#FFFFFF' : '#6B6B66',
+      ctaLabel: picked.length ? '10월 ' + picked.slice().sort((a, b) => a - b).join(', ') + '일 쉬어가기' : '날짜를 골라주세요'
+    };
+  }
+}
+</script>
+</body>
+</html>
