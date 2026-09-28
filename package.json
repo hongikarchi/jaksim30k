@@ -1,5 +1,6 @@
 {
   "name": "jaksim30k",
+  "description": "작심삼만원 — 지키거나, 내거나.",
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {

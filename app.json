@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "jaksim30k",
+    "name": "작심삼만원",
     "slug": "jaksim30k",
+    "description": "지키거나, 내거나.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
