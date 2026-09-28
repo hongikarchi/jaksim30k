@@ -15,6 +15,8 @@ try {
 }
 
 const [root, out, seedPath, ...routes] = process.argv.slice(2);
+// 한글 변형 이름도 서로 겹치지 않게 파일 이름을 만든다
+const fileName = (r) => (encodeURIComponent(decodeURIComponent(r)).replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '') || 'root');
 fs.mkdirSync(out, { recursive: true });
 
 const types = { '.js': 'application/javascript', '.html': 'text/html', '.css': 'text/css', '.ttf': 'font/ttf', '.png': 'image/png', '.json': 'application/json', '.ico': 'image/x-icon' };
@@ -46,7 +48,7 @@ page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
 for (const r of routes) {
   await page.goto(`http://localhost:${port}${r}`);
   await page.waitForTimeout(1500);
-  const name = r.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '') || 'root';
+  const name = fileName(r);
   await page.screenshot({ path: path.join(out, `${name}.png`) });
   console.log('shot', r, '->', `${name}.png`);
 }
@@ -54,7 +56,7 @@ if (errors.length) console.log('ERRORS:\n' + [...new Set(errors)].join('\n'));
 
 // 여러 장을 한 장으로 모아 보기 (가로 4장씩, 1배율)
 if (routes.length > 1) {
-  const files = routes.map((r) => (r.replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_|_$/g, '') || 'root') + '.png');
+  const files = routes.map((r) => fileName(r) + '.png');
   const imgs = files
     .map((f) => `<figure><img src="data:image/png;base64,${fs.readFileSync(path.join(out, f)).toString('base64')}"><figcaption>${f}</figcaption></figure>`)
     .join('');
