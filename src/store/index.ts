@@ -58,8 +58,11 @@ type Actions = {
 
   registerCard: (company: string) => void;
 
-  /** 사진 제출. 업로드 실패면 null */
-  submitPhoto: (occurrenceId: string, input: { uri?: string; takenAt: number; book?: { title: string; line: string } }) => string | null;
+  /** 사진 제출. uploaded가 false면 업로드 실패(제출 실패 화면에서 retryUpload로 다시 보낸다) */
+  submitPhoto: (
+    occurrenceId: string,
+    input: { uri?: string; takenAt: number; book?: { title: string; line: string } },
+  ) => { id: string; uploaded: boolean } | null;
   retryUpload: (submissionId: string) => boolean;
   /** AI 1차 판정 (가짜) */
   judge: (submissionId: string) => AiResult;
@@ -267,11 +270,11 @@ export const useStore = create<Store>()(
             if (d.dev.nextUploadFails) {
               d.dev.nextUploadFails = false;
               s.uploadFailed = true;
-              return null;
+              return { id: s.id, uploaded: false };
             }
             s.submittedAt = now;
             o.status = 'judging';
-            return s.id;
+            return { id: s.id, uploaded: true };
           }),
 
         retryUpload: (submissionId) =>

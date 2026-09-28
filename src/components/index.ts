@@ -14,3 +14,4 @@ export { Calendar, type DayMark } from './Calendar';
 export { PhotoCard, SkeletonBar, Dots } from './PhotoCard';
 export { Field, Toggle, Segmented } from './Field';
 export { CameraFrame, ShutterBar, CameraPlaceholder } from './CameraFrame';
+export { LiveCamera, type LiveCameraHandle } from './LiveCamera';
