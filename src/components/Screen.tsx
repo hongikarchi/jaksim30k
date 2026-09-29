@@ -62,12 +62,12 @@ export function Screen({
   return (
     <View style={[styles.flex, { backgroundColor: dark ? colors.camera : colors.ground }]}>
       <StatusBar style={dark ? 'light' : 'dark'} />
-      <KeyboardAvoidingView
-        style={[styles.flex, { paddingTop: top, paddingBottom: bottom }]}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      >
-        {body}
-        {footer ? <View style={{ paddingHorizontal: gutter, paddingTop: 12 }}>{footer}</View> : null}
+      {/* iOS의 padding 방식은 자기 paddingBottom을 키보드 높이로 덮어쓰므로 여백은 안쪽 View에 준다 */}
+      <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <View style={[styles.flex, { paddingTop: top, paddingBottom: bottom }]}>
+          {body}
+          {footer ? <View style={{ paddingHorizontal: gutter, paddingTop: 12 }}>{footer}</View> : null}
+        </View>
       </KeyboardAvoidingView>
       {overlay}
     </View>
