@@ -24,7 +24,12 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.jaksim30k.app"
+      "package": "com.jaksim30k.app",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -57,6 +62,19 @@
         }
       ]
     ],
-    "scheme": "jaksim30k"
+    "scheme": "jaksim30k",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "49149c01-afac-4f8b-8d89-3bb57e88ff8f"
+      }
+    },
+    "owner": "archivibes-team",
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/49149c01-afac-4f8b-8d89-3bb57e88ff8f"
+    }
   }
 }
